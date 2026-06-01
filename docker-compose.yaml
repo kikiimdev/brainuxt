@@ -10,8 +10,8 @@ services:
       - "3000:3000"
     environment:
       - NODE_ENV=production
-      - APP_URL=http://localhost:3000
-      - MIMO_API_KEY=""
+      - APP_URL={APP_URL}
+      - MIMO_API_KEY={MIMO_API_KEY}
     volumes:
       # 🎯 MATCHED MAPPING: Connects your internal wiki_vault directly to a shared Docker volume
       - obsidian_vault:/app/wiki_vault
