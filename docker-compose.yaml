@@ -29,8 +29,11 @@ services:
       - PGID=1000
       - TZ=Asia/Singapore
       - SUBFOLDER=/
-      - CUSTOM_RES=1280x800
-      - CUSTOM_FPS=30
+      - SELKIES_IS_MANUAL_RESOLUTION_MODE=true
+      - SELKIES_MANUAL_WIDTH=1280
+      - SELKIES_MANUAL_HEIGHT=720
+      - SELKIES_FRAMERATE=30
+      - SELKIES_USE_CSS_SCALING=true # Tells browser to stretch the 720p stream natively via CSS
     volumes:
       - obsidian_config:/config
       - obsidian_vault:/config/Obsidian/Vaults/wiki_vault
