@@ -13,6 +13,7 @@ export default defineNuxtConfig({
         checks: {
           invalidAnnotation: false,
         },
+        external: ["sharp"],
       },
     },
   },
