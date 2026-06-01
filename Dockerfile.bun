@@ -1,0 +1,38 @@
+# ------------------------------------------------------------------------------
+FROM oven/bun:alpine AS bun-base
+
+WORKDIR /app
+
+# ------------------------------------------------------------------------------
+FROM bun-base AS bun-install
+
+COPY package.json bun.lock /app/
+
+RUN cd /app; bun install --frozen-lockfile
+
+# ------------------------------------------------------------------------------
+FROM bun-base AS bun-build
+
+COPY --from=bun-install /app/node_modules /app/node_modules
+
+COPY . .
+
+RUN cd /app; bun run -b build
+
+# ------------------------------------------------------------------------------
+FROM alpine:latest AS release
+
+WORKDIR /app
+
+COPY --from=bun-build /app/brainuxt /app/brainuxt
+COPY --from=bun-build /app/node_modules /app/node_modules
+
+# - https://github.com/oven-sh/bun/issues/23910
+# - https://github.com/oven-sh/bun/issues/918
+RUN apk add --no-cache libstdc++ libgcc libc6-compat gcompat
+
+EXPOSE 3000/tcp
+
+ENV LD_LIBRARY_PATH=/app/node_modules/onnxruntime-node/bin/napi-v6/linux/arm64:$LD_LIBRARY_PATH
+
+CMD ["/app/brainuxt"]

@@ -1,0 +1,42 @@
+services:
+  # TIER 1: The Optimized Ingestion & Vector AI Backend
+  brainuxt-backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: brainuxt_backend
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - APP_URL=http://localhost:3000
+      - MIMO_API_KEY=""
+    volumes:
+      # 🎯 MATCHED MAPPING: Connects your internal wiki_vault directly to a shared Docker volume
+      - obsidian_vault:/app/wiki_vault
+      - backend_db:/app/server/db
+
+  # TIER 2: The Self-Hosted Browser UI Instance (Obsidian)
+  obsidian-ui:
+    image: linuxserver/obsidian:1.12.7
+    container_name: obsidian_ui
+    restart: unless-stopped
+    security_opt:
+      - seccomp=unconfined # Required for KasmVNC hardware rendering
+    ports:
+      - "8443:8443"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Singapore
+      - SUBFOLDER=/
+    volumes:
+      - obsidian_config:/config
+      # 🎯 THE SYNC SHAFT: Mount the exact same vault volume so the GUI can see it
+      - obsidian_vault:/config/Obsidian/Vaults/wiki_vault
+
+volumes:
+  obsidian_vault: # Shared disk space where your time-sharded markdown files live
+  obsidian_config:
+  backend_db:
