@@ -3,7 +3,7 @@ services:
   brainuxt-backend:
     build:
       context: .
-      dockerfile: Dockerfile.bun
+      dockerfile: Dockerfile
     container_name: brainuxt_backend
     restart: unless-stopped
     environment:
