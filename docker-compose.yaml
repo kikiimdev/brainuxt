@@ -7,7 +7,7 @@ services:
     container_name: brainuxt_backend
     restart: unless-stopped
     environment:
-      - SERVICE_URL_BRAINUXT_3000
+      - SERVICE_URL_BRAINUXT_BACKEND_3000
       - NODE_ENV=production
       - APP_URL={APP_URL}
       - MIMO_API_KEY={MIMO_API_KEY}
@@ -24,7 +24,7 @@ services:
     security_opt:
       - seccomp=unconfined # Required for KasmVNC hardware rendering
     environment:
-      - SERVICE_URL_OBSIDIAN_8443
+      - SERVICE_URL_OBSIDIAN_UI_8443
       - PUID=1000
       - PGID=1000
       - TZ=Asia/Singapore
