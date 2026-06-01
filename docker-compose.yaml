@@ -29,9 +29,10 @@ services:
       - PGID=1000
       - TZ=Asia/Singapore
       - SUBFOLDER=/
+      - CUSTOM_RES=1280x800
+      - CUSTOM_FPS=30
     volumes:
       - obsidian_config:/config
-      # 🎯 THE SYNC SHAFT: Mount the exact same vault volume so the GUI can see it
       - obsidian_vault:/config/Obsidian/Vaults/wiki_vault
 
 volumes:
