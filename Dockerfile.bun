@@ -30,9 +30,12 @@ COPY --from=bun-build /app/node_modules /app/node_modules
 # - https://github.com/oven-sh/bun/issues/23910
 # - https://github.com/oven-sh/bun/issues/918
 RUN apk add --no-cache libstdc++ libgcc libc6-compat gcompat
+RUN apk add --no-cache onnxruntime --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing/ -X http://dl-cdn.alpinelinux.org/alpine/edge/community/ -X http://dl-cdn.alpinelinux.org/alpine/edge/main
+RUN cp /usr/lib/libonnxruntime.so.1.15.1 /app/onnxruntime.so
 
 EXPOSE 3000/tcp
 
-ENV LD_LIBRARY_PATH=/app/node_modules/onnxruntime-node/bin/napi-v6/linux/x64:$LD_LIBRARY_PATH
+# ENV LD_LIBRARY_PATH=/app/node_modules/onnxruntime-node/bin/napi-v6/linux/x64:$LD_LIBRARY_PATH
+ENV LD_LIBRARY_PATH=/app/onnxruntime.so
 
 CMD ["/app/brainuxt"]
