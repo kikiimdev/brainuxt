@@ -8,7 +8,8 @@ FROM bun-base AS bun-install
 
 COPY package.json bun.lock /app/
 
-RUN cd /app; bun install --frozen-lockfile
+RUN cd /app; bun install --frozen-lockfile; bun install --os=linux --libc=musl --cpu=x64 sharp
+
 
 # ------------------------------------------------------------------------------
 FROM bun-base AS bun-build
