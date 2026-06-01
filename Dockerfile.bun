@@ -38,6 +38,6 @@ RUN cp /usr/lib/libonnxruntime.so.1.24.4 /app/onnxruntime.so
 EXPOSE 3000/tcp
 
 # ENV LD_LIBRARY_PATH=/app/node_modules/onnxruntime-node/bin/napi-v6/linux/x64:$LD_LIBRARY_PATH
-ENV LD_LIBRARY_PATH=/app/onnxruntime.so
+# ENV LD_LIBRARY_PATH=/app/onnxruntime.so
 
 CMD ["/app/brainuxt"]
