@@ -6,9 +6,8 @@ services:
       dockerfile: Dockerfile
     container_name: brainuxt_backend
     restart: unless-stopped
-    ports:
-      - "8442:3000"
     environment:
+      - SERVICE_URL_BRAINUXT_3000
       - NODE_ENV=production
       - APP_URL={APP_URL}
       - MIMO_API_KEY={MIMO_API_KEY}
@@ -24,9 +23,8 @@ services:
     restart: unless-stopped
     security_opt:
       - seccomp=unconfined # Required for KasmVNC hardware rendering
-    ports:
-      - "8443:8443"
     environment:
+      - SERVICE_URL_OBSIDIAN_8443
       - PUID=1000
       - PGID=1000
       - TZ=Asia/Singapore
