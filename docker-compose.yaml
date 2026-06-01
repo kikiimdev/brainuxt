@@ -14,7 +14,7 @@ services:
     volumes:
       # 🎯 MATCHED MAPPING: Connects your internal wiki_vault directly to a shared Docker volume
       - obsidian_vault:/app/wiki_vault
-      - backend_db:/app/server/db
+      - backend_db:/app/db
 
   # TIER 2: The Self-Hosted Browser UI Instance (Obsidian)
   obsidian-ui:
