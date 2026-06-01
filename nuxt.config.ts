@@ -48,6 +48,8 @@ export default defineNuxtConfig({
   css: ["~/assets/css/main.css"],
   modules: ["nuxt-bun-compile", "@nuxt/image", "@nuxt/ui", "@vueuse/nuxt", "evlog/nuxt"],
 
+  image: false, // Disable Nuxt Image module's default optimizations
+
   evlog: {
     env: {
       service: "default-service",
