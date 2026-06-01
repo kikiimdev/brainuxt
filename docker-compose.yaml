@@ -12,9 +12,8 @@ services:
       - APP_URL
       - MIMO_API_KEY
     volumes:
-      # 🎯 MATCHED MAPPING: Connects your internal wiki_vault directly to a shared Docker volume
       - obsidian_vault:/app/wiki_vault
-      - backend_db:/app/vault.db # Persistent storage for your vector database (e.g., SQLite, Pinecone, etc.)
+      - ./vault.db:/app/vault.db
 
   # TIER 2: The Self-Hosted Browser UI Instance (Obsidian)
   obsidian-ui:
@@ -39,6 +38,5 @@ services:
       - obsidian_vault:/config/Obsidian/Vaults/wiki_vault
 
 volumes:
-  obsidian_vault: # Shared disk space where your time-sharded markdown files live
+  obsidian_vault:
   obsidian_config:
-  backend_db:
