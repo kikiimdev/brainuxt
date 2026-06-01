@@ -94,7 +94,7 @@ export default defineNuxtConfig({
     },
 
     bunCompile: {
-      target: "bun-linux-arm64",
+      target: "bun-linux-x64",
     },
   },
 });
